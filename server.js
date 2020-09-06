@@ -12,5 +12,5 @@ app.get('/normal',(req,res)=> res.send('This is normal testing'));
 
 app.use('/api/users',require('./routes/api/users.js'));
 app.use('/api/auth',require('./routes/api/auth.js'));
-app.use('/api/post',require('./routes/api/post.js'));
+app.use('/api/posts',require('./routes/api/post.js'));
 app.use('/api/profile',require('./routes/api/profile.js'));

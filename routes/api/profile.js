@@ -29,7 +29,7 @@ router.get('/',async (req,res)=>{
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-})
+});
 
 router.get('/user/:userId', async (req,res)=>{
 
@@ -83,6 +83,7 @@ router.put('/experience',[auth,[
         res.status(500).send('Server Error');
     }
 });
+
 router.put('/education',[auth,[
     check('school','School is required').not().isEmpty(),
     check('degree','Degree is required').not().isEmpty(),
