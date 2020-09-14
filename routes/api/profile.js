@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../model/Profile');
 const User = require('../../model/User');
+const Post = require('../../model/Post');
 const { check,validationResult } = require('express-validator');
 const config = require('config');
 const request = require('request');
@@ -50,6 +51,10 @@ router.get('/user/:userId', async (req,res)=>{
 
 router.delete('/',auth,async (req,res)=>{
     try{
+        //deleting the posts
+        await Post.deleteMany({user:req.user.id});
+        //deleting the posts ends 
+        
         await Profile.findOneAndRemove({user:req.user.id});
         await User.findOneAndRemove({_id:req.user.id});
         res.json({'msg':'User and Associated Profile is deleted'});
@@ -70,7 +75,9 @@ router.put('/experience',[auth,[
         return res.status(400).json({errors:errors.array()});
     }
     const {title,company,from} = req.body;
-    const newExp = {title,company,from};
+    const newExp = {title:title.toString(),
+        company:company.toString(),
+        from};
     //we will now use database, hence the tryCatch block
 
     try{
@@ -95,7 +102,11 @@ router.put('/education',[auth,[
         return res.status(400).json({errors:errors.array()});
     }
     const {school,degree,fieldofstudy,from} = req.body;
-    const newEducation = {school,degree,fieldofstudy,from};
+    const newEducation = {
+        school:school.toString(),
+        degree:degree.toString(),
+        fieldofstudy:fieldofstudy.toString(),
+        from};
     //we will now use database, hence the tryCatch block
 
     try{
@@ -163,19 +174,24 @@ router.post('/',[auth,[
     } = req.body;
 
     const profileFields = {};
-    if(company) profileFields.company = company;
-    if(status) profileFields.status = status;
-    profileFields.user = req.user.id;
 
-    if(skills){
-        profileFields.skills = skills.split(',').map(skill => skill.trim());
-    }
+    
 
-    profileFields.social = {};
-    if(youtube) profileFields.social.youtube = youtube;
-    if(facebook) profileFields.social.facebook = facebook;
+
 
     try{
+        if(skills){
+            profileFields.skills = skills.toString().split(',').map(skill => skill.trim());
+        }
+        if(status) profileFields.status = status.toString();
+
+        if(company) profileFields.company = company.toString();
+        profileFields.user = req.user.id;
+    
+        profileFields.social = {};
+        if(youtube) profileFields.social.youtube = youtube.toString();
+        if(facebook) profileFields.social.facebook = facebook.toString();
+
         let profile = await Profile.findOne({user:req.user.id});
         if(profile){
             profile = await Profile.findOneAndUpdate({user:req.user.id},{$set:profileFields},{new:true});
