@@ -14,3 +14,6 @@ export const ADD_EDUCATION = "ADD_EDUCATION";
 export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
+export const GET_PROFILES = "GET_PROFILES";
+export const GET_REPOS = "GET_REPOS";
+export const REPOS_ERROR = "REPOS_ERROR";

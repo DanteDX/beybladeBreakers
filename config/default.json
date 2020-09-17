@@ -2,6 +2,6 @@
     "mongoURI":"mongodb+srv://Martin:Martin@mern.wercy.mongodb.net/MERN?retryWrites=true&w=majority",
     "jwtSecret":"mySecret",
     "githubClientId":"7feb3b05ff9105a692ee",
-    "githubSecret":"c54baa50e3ddbaa453454963f74556134acfbfb6"
+    "githubSecret":"7a57f533e5233783aa6f9b5c5250e9a751514cde"
 }
 

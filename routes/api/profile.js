@@ -170,15 +170,10 @@ router.post('/',[auth,[
         return res.status(400).json({errors:errors.array()});
     }
     const {
-        company,status,skills,facebook,youtube
+        company,status,skills,facebook,youtube,githubusername
     } = req.body;
 
     const profileFields = {};
-
-    
-
-
-
     try{
         if(skills){
             profileFields.skills = skills.toString().split(',').map(skill => skill.trim());
@@ -186,6 +181,7 @@ router.post('/',[auth,[
         if(status) profileFields.status = status.toString();
 
         if(company) profileFields.company = company.toString();
+        if(githubusername) profileFields.githubusername = githubusername.toString();
         profileFields.user = req.user.id;
     
         profileFields.social = {};
@@ -207,10 +203,10 @@ router.post('/',[auth,[
     }
 });
 
-router.get('/github/:userName',(req,res)=>{
+router.get('/github/:username',(req,res)=>{
     try{
         const options = {
-            uri:`https://api.github.com/users/${req.params.userName}/repos?per_page=5&sort=created:asc&client_id=
+            uri:`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=
             ${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
             method:'GET',
             headers:{'user-agent':'node.js'}

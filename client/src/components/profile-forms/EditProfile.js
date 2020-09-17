@@ -44,7 +44,7 @@ const EditProfile = ({createProfile,history,getCurrentProfile,profile:{profile,l
             // location: loading || !profile.location ? '' : profile.location,
             status: loading || !profile.status ? '' : profile.status,
             skills: loading || !profile.skills ? '' : profile.skills,
-            // githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
+            githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
             // bio: loading || !profile.bio ? '' : profile.bio,
             // twitter: loading || !profile.social.twitter ? '' : profile.social.twitter,
             facebook: loading || !profile.social.facebook ? '' : profile.social.facebook,
@@ -53,7 +53,7 @@ const EditProfile = ({createProfile,history,getCurrentProfile,profile:{profile,l
             // instagram: loading || !profile.social.instagram ? '' : profile.social.instagram
         });
         // the problem is with the backend as it is not set up with the commented fields
-    },[loading]);
+    },[loading,getCurrentProfile]);
 
     const onChange = e => setFormData({...formData,[e.target.name]:[e.target.value]});
     const onSubmit = e =>{

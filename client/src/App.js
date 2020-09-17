@@ -8,6 +8,7 @@ import EditProfile from './components/profile-forms/EditProfile';
 import AddEducation from './components/profile-forms/AddEducation';
 import AddExperience from './components/profile-forms/AddExperience';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Profile from './components/profile/Profile';
 import './App.css';
 //Redux
 import {Provider} from 'react-redux';
@@ -16,7 +17,9 @@ import Alert from './components/layout/Alert';
 import {loadUser} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Dashboard from './components/dashboard/Dashboard';
+import Profiles from './components/profiles/Profiles';
 import PrivateRoute from './components/routing/PrivateRoute';
+
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -40,6 +43,8 @@ export default function App(){
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/profiles' component={Profiles} />
+              <Route exact path='/profile/:id' component={Profile} />
               <PrivateRoute exact path ='/dashboard' component={Dashboard} />
               <PrivateRoute exact path ='/create-profile' component={CreateProfile} />
               <PrivateRoute exact path ='/edit-profile' component={EditProfile} />
