@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
+import {addLike,removeLike} from '../../actions/post';
 const ProfileItem = ({
     profile:{
         user:{_id,name,avatar},
